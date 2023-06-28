@@ -77,7 +77,7 @@ nginx_service=$(systemctl status nginx | grep Active | awk '{print $3}' | cut -d
 clear
 # STATUS SERVICE  SSH 
 if [[ $ssh_service == "running" ]]; then 
-   status_ssh="✔️"
+   status_ssh="${green}ON${NC}"
 else
    status_ssh="${RED}❌${NC} "
 fi
@@ -85,35 +85,35 @@ fi
 # // SSH Websocket Proxy
 ssh_ws=$( systemctl status ws | grep Active | awk '{print $3}' | sed 's/(//g' | sed 's/)//g' )
 if [[ $ssh_ws == "running" ]]; then
-    status_ws_epro="${green}✔️${NC}"
+    status_ws_epro="${green}ON${NC}"
 else
     status_ws_epro="${RED}❌${NC} "
 fi
 
 # STATUS SERVICE HAPROXY
 if [[ $haproxy_service == "running" ]]; then 
-   status_haproxy="${green}✔️${NC}"
+   status_haproxy="${green}ON${NC}"
 else
    status_haproxy="${RED}❌${NC} "
 fi
 
 # STATUS SERVICE XRAY
 if [[ $xray_service == "running" ]]; then 
-   status_xray="${green}✔️${NC}"
+   status_xray="${green}ON${NC}"
 else
    status_xray="${RED}❌${NC} "
 fi
 
 # STATUS SERVICE NGINX
 if [[ $nginx_service == "running" ]]; then 
-   status_nginx="${green}✔️${NC}"
+   status_nginx="${green}ON${NC}"
 else
    status_nginx="${RED}❌${NC} "
 fi
 
 # STATUS SERVICE Dropbear
 if [[ $dropbear_service == "running" ]]; then 
-   status_dropbear="${green}✔️${NC}"
+   status_dropbear="${green}ON${NC}"
 else
    status_dropbear="${RED}❌${NC} "
 fi
@@ -134,34 +134,34 @@ ssk=$(cat /etc/shadowsocks/.shadowsocks.db | wc -l)
 #SSH total account
 sssh=$(cat /etc/ssh/.ssh.db | wc -l)
 echo -e " "
-echo -e " ${IPurple}╭══════════════════════════════════════════════════════════╮${NC}"
-echo -e " ${IPurple}│$IWhite\033[41m                    SYSTEM INFORMATION                    $IWhite${IPurple}│$IWhite"
-echo -e " ${IPurple}╰══════════════════════════════════════════════════════════╯${NC}"
-echo -e " ${IPurple}╭══════════════════════════════════════════════════════════╮${NC}"
-echo -e " ${IPurple}│$BICyan System OS${NC}     $IPurple=$BICyan $MODEL${NC}"
-echo -e " ${IPurple}│$BICyan IP VPS${NC}        $IPurple=$BICyan $IPVPS${NC}"
-echo -e " ${IPurple}│$BICyan Domain${NC}        $IPurple=$BICyan $domain${NC}"
+echo -e " ${lolcat}┌──────────────────────────────────────────────────────────┐${lolcat}"  | lolcat
+echo -e " ${lolcat}│$IWhite\033[41m                    SYSTEM INFORMATION                    $IWhite${lolcat}│$lolcat"
+echo -e " ${IPurple}└──────────────────────────────────────────────────────────┘${lolcat}"  | lolcat
+echo -e " ${lolcat}┌──────────────────────────────────────────────────────────┐${lolcat}"  | lolcat
+echo -e " ${lolcat}│$BICyan System OS${NC}     $IPurple=$BICyan $MODEL${NC}"
+echo -e " ${lolcat}│$BICyan IP VPS${NC}        $IPurple=$BICyan $IPVPS${NC}"
+echo -e " ${lolcat}│$BICyan Domain${NC}        $IPurple=$BICyan $domain${NC}"
 #echo -e " ${IPurple}│$BICyan Expiry script${NC} $IPurple=$wh $certifacate ${wh}Days"
-echo -e " ${IPurple}│$NC Expiry script${NC} $IPurple=$green $CCertifacate ${NC}days"
-echo -e " ${IPurple}╰══════════════════════════════════════════════════════════╯${NC}"
+echo -e " ${lolcat}│$BICyan Expiry script${NC} $IPurple=$wh $CCertifacate ${wh}Days"
+echo -e " ${lolcat}└──────────────────────────────────────────────────────────┘${lolcat}"  | lolcat
 echo -e "        $BICyan SSH $BICyan: $status_ssh" "        $BICyan NGINX $BICyan: $status_nginx" "        $BICyan XRAY $BICyan: $status_xray         $NC" 
-echo -e " ${IPurple}╭══════════════════════════════════════════════════════════╮${NC}"
-echo -e " ${IPurple}│                                                          │"
-echo -e " ${IPurple}│$BICyan [${wh}01${BICyan}]$BICyan SSH MENU     ${IPurple}│$BICyan [${wh}07${BICyan}]$BICyan DELL ALL EXP ${IPurple}│$BICyan [${wh}13${BICyan}]$BICyan BCKP/RSTR   ${IPurple}│$wh" 
-echo -e " ${IPurple}│$BICyan [${wh}02${BICyan}]$BICyan VMESS MENU   ${IPurple}│$BICyan [${wh}08${BICyan}]$BICyan AUTOREBOOT  ${IPurple} │$BICyan [${wh}14${BICyan}]$BICyan REBOOT      ${IPurple}│$wh"    
-echo -e " ${IPurple}│$BICyan [${wh}03${BICyan}]$BICyan VLESS MENU   ${IPurple}│$BICyan [${wh}09${BICyan}]$BICyan INFO PORT   ${IPurple} │$BICyan [${wh}15${BICyan}]$BICyan RESTART     ${IPurple}│$wh"   
-echo -e " ${IPurple}│$BICyan [${wh}04${BICyan}]$BICyan TROJAN MENU  ${IPurple}│$BICyan [${wh}10${BICyan}]$BICyan SPEEDTEST   ${IPurple} │$BICyan [${wh}16${BICyan}]$BICyan DOMAIN      ${IPurple}│$wh" 
-echo -e " ${IPurple}│$BICyan [${wh}05${BICyan}]$BICyan SHADOW MENU  ${IPurple}│$BICyan [${wh}11${BICyan}]$BICyan RUNNING     ${IPurple} │$BICyan [${wh}17${BICyan}]$BICyan CERT SSL    ${IPurple}│$wh"
-echo -e " ${IPurple}│$BICyan [${wh}06${BICyan}]$BICyan LIMITSPEED   ${IPurple}│$BICyan [${wh}12${BICyan}]$BICyan CLEAR LOG   ${IPurple} │$BICyan [${wh}18${BICyan}]$BICyan CLEAR CACHE ${IPurple}│$wh"
-echo -e " ${IPurple}│                                                          │"
-echo -e " ${IPurple}╰══════════════════════════════════════════════════════════╯${NC}"
+echo -e " ${lolcat}┌──────────────────────────────────────────────────────────┐${lolcat}"  | lolcat
+echo -e " ${lolcat}│                                                          │"
+echo -e " ${lolcat}│$BICyan [${wh}01${BICyan}]$BICyan SSH MENU     ${IPurple}│$BICyan [${wh}07${BICyan}]$BICyan DELL ALL EXP ${IPurple}│$BICyan [${wh}13${BICyan}]$BICyan BCKP/RSTR   ${lolcat}│$wh" 
+echo -e " ${lolcat}│$BICyan [${wh}02${BICyan}]$BICyan VMESS MENU   ${IPurple}│$BICyan [${wh}08${BICyan}]$BICyan AUTOREBOOT  ${IPurple} │$BICyan [${wh}14${BICyan}]$BICyan REBOOT      ${lolcat}│$wh"    
+echo -e " ${lolcat}│$BICyan [${wh}03${BICyan}]$BICyan VLESS MENU   ${IPurple}│$BICyan [${wh}09${BICyan}]$BICyan INFO PORT   ${IPurple} │$BICyan [${wh}15${BICyan}]$BICyan RESTART     ${lolcat}│$wh"   
+echo -e " ${lolcat}│$BICyan [${wh}04${BICyan}]$BICyan TROJAN MENU  ${IPurple}│$BICyan [${wh}10${BICyan}]$BICyan SPEEDTEST   ${IPurple} │$BICyan [${wh}16${BICyan}]$BICyan DOMAIN      ${lolcat}│$wh" 
+echo -e " ${lolcat}│$BICyan [${wh}05${BICyan}]$BICyan SHADOW MENU  ${IPurple}│$BICyan [${wh}11${BICyan}]$BICyan RUNNING     ${IPurple} │$BICyan [${wh}17${BICyan}]$BICyan CERT SSL    ${lolcat}│$wh"
+echo -e " ${lolcat}│$BICyan [${wh}06${BICyan}]$BICyan LIMITSPEED   ${IPurple}│$BICyan [${wh}12${BICyan}]$BICyan CLEAR LOG   ${IPurple} │$BICyan [${wh}18${BICyan}]$BICyan CLEAR CACHE ${lolcat}│$wh"
+echo -e " ${lolcat}│                                                          │"
+echo -e " ${lolcat}└──────────────────────────────────────────────────────────┘${lolcat}"  | lolcat
 echo -e "               "                    "SSH = $sssh" "  VMESS = $xvmess"  " VLESS = $xvless" | lolcat
 echo -e "                 "                      "TROJAN = $xtrojan" "SHADOWSOCKS = $ssk" | lolcat
-echo -e " ${IPurple}╭══════════════════════════════════════════════════════════╮${NC}"
-echo -e " ${IPurple}│$BICyan Version       ${IPurple}=$BICyan V3.0"
-echo -e " ${IPurple}│$BICyan User          ${IPurple}=$BICyan $username"
-echo -e " ${IPurple}│$BICyan Script Status ${IPurple}=$NC $exp $sts  "
-echo -e " ${IPurple}╰══════════════════════════════════════════════════════════╯${NC}"
+echo -e " ${lolcat}   ┌────────────────────────────────────────────────────┐${lolcat}"  | lolcat
+echo -e " ${lolcat}   │$BICyan Version       ${IPurple}=$BICyan V3.0"
+echo -e " ${lolcat}   │$BICyan User          ${IPurple}=$BICyan $username"
+echo -e " ${lolcat}   │$BICyan Script Status ${IPurple}=$NC $exp $sts  "
+echo -e " ${lolcat}   └────────────────────────────────────────────────────┘${lolcat}"  | lolcat
 echo
 read -p " Select menu : " opt
 echo -e ""
@@ -211,7 +211,7 @@ menu
 ;;
 10)
 clear
-speedtest_cli.py
+speedtest-cli
 echo ""
 read -n 1 -s -r -p "Press any key to back on menu"
 menu
